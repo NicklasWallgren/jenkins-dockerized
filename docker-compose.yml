@@ -1,0 +1,25 @@
+version: '2.3'
+
+networks:
+    public:
+        driver: bridge
+
+services:
+  jenkins:
+      container_name: jenkins
+      build:
+        context: .
+        dockerfile: ./images/Dockerfile
+        args:
+          - DEFAULT_USER=${DEFAULT_USER-root}
+          - JENKINS_PLUGINS=${JENKINS_PLUGINS}
+      volumes:
+        - ${DATA_DIRECTORY-./data}:/var/jenkins_home:cached
+        - ${DOCKER_SOCKET_FILE-/var/run/docker.sock}:/var/run/docker.sock
+      ports:
+        - "${WEB_INTERFACE_PORT-8080}:8080"
+        - "${COMMUNICATION_PORT-5000}:5000"
+        - "${API_PORT-50000}:50000"
+      networks:
+        - public
+      env_file: ${ENV_FILE-.env.default}
