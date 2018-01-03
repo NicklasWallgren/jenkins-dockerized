@@ -9,7 +9,7 @@
 
 ```bash
 # clone our repo
-git checkout https://github.com/NicklasWallgren/jenkins-dockerized.git jenkins
+git clone https://github.com/NicklasWallgren/jenkins-dockerized.git jenkins
 ```
 ```bash
 # Change directory
